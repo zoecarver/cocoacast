@@ -1,0 +1,32 @@
+import RNFS from 'react-native-fs';
+import { add_download } from './storage';
+import { Worker } from 'rn-workers';
+
+export default (item, func, setStateCurrentlyDownloading, downloading) => {
+  let file = item.title + '.mp3';
+  file = file.replace(/[^A-Z0-9]/gi, '_');
+  file = `${RNFS.DocumentDirectoryPath}/` + file + '.mp3';
+
+  console.log('started downloading', file);
+  setStateCurrentlyDownloading(item.title, true, downloading);
+
+  const worker = new Worker();//"./worker.js"
+
+  worker.postMessage(JSON.stringify({
+    file: file,
+    url: item.enclosures[0].url
+  }));
+
+  worker.onmessage = () => {
+    worket.terminate();
+
+    console.log('done downloading');
+    item.enclosures[0].url = file;
+
+    add_download(item).then(resp => {
+      console.log('recived responce and saving...', resp);
+      func(resp);
+      setStateCurrentlyDownloading(item.title, false, downloading);
+    });
+  }
+};

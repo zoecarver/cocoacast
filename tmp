@@ -1,0 +1,15 @@
+import { WorkerService } from 'rn-workers'
+import RNFS from 'react-native-fs';
+
+const self = new WorkerService();
+
+self.onmessage = (message) => {
+  const obj = JSON.stringify(message);
+
+  RNFS.downloadFile({
+    fromUrl: obj.url,
+    toFile: obj.file,
+  }).promise.then(() => {
+    self.postMessage("done");
+  })
+}
