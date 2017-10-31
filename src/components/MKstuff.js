@@ -18,5 +18,4 @@ export const FlatLoginButton = MKButton.flatButton()
   .withText('LOG IN')
   .build();
 
-export const PlainFab = MKButton.plainFab()
-  .build();
+export const PlainFab = MKButton.plainFab().build();

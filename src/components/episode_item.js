@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Button, Dimensions, Text } from 'react-native';
+import { View, Button, Dimensions, Text, TouchableOpacity } from 'react-native';
 import Subscriptions from './subscriptions';
 import Auth from './auth';
 import Sound from 'react-native-sound';
@@ -19,7 +19,15 @@ class PPIcon extends Component {
   }
 
   render() {
-    return <View>{!this.props.playing ? <PlayIcon /> : <PauseIcon />}</View>;
+    return (
+      <View>
+        {!this.props.playing ? (
+          <PlayIcon onPress={this.props.func} />
+        ) : (
+          <PauseIcon onPress={this.props.func} />
+        )}
+      </View>
+    );
   }
 }
 
@@ -64,7 +72,9 @@ class Episode extends Component {
   render() {
     return (
       <View style={styles.episodes}>
-        <PPIcon playing={this.state.playing} onPress={this._press.bind(this)} />
+        <TouchableOpacity onPress={this._press.bind(this)}>
+          <PPIcon playing={this.state.playing} />
+        </TouchableOpacity>
         <DownloadButton
           setDownloads={this.props.setDownloads}
           unSetDownloads={this.props.unSetDownloads}
@@ -74,7 +84,7 @@ class Episode extends Component {
           downloading={this.props.downloading}
           setStateCurrentlyDownloading={this.props.setStateCurrentlyDownloading}
         />
-      <Text style={{flex: 0.85}}>{this.props.item.title + '\n'}</Text>
+        <Text style={{ flex: 0.85 }}>{this.props.item.title + '\n'}</Text>
       </View>
     );
   }

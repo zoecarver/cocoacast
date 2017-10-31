@@ -1,5 +1,6 @@
-import { Icon } from 'react-native-elements'
-import React, { Component, PropTypes, InteractionManager } from 'react';
+import { Icon } from 'react-native-elements';
+import React, { Component, PropTypes } from 'react';
+import {TouchableOpacity} from 'react-native';
 import { PlainFab } from './MKstuff';
 import _download from '../actions/download';
 import _ from 'lodash';
@@ -16,42 +17,48 @@ const search = (array, id) => {
 };
 
 export class PauseIcon extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <Icon
-      raised
-      name='control-pause'
-      type='simple-line-icon'
-      color='#f50' />;
+    return (
+      <Icon raised name="control-pause" type="simple-line-icon" color="#f50" />
+    );
   }
 }
 
 export class PlayIcon extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <Icon
-      raised
-      name='control-play'
-      type='simple-line-icon'
-      color='#f50' />;
+    return (
+      <Icon raised name="control-play" type="simple-line-icon" color="#f50" />
+    );
   }
 }
 
 class TrashIcon extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <Icon
-      raised
-      name='trash'
-      type='simple-line-icon'
-      color='#f50' />;
+    return <Icon raised name="trash" type="simple-line-icon" color="#f50" />;
   }
 }
 
 class CloudIcon extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <Icon
-      raised
-      name='cloud-download'
-      type='simple-line-icon'
-      color='#f50' />;;
+    return (
+      <Icon raised name="cloud-download" type="simple-line-icon" color="#f50" />
+    );
   }
 }
 
@@ -83,19 +90,25 @@ export class DownloadButton extends Component {
 
     if (search(downloads, this.props.title_check)) {
       return (
-        <TrashIcon onPress={() => this._remove()}/>
+        <TouchableOpacity onPress={() => this._remove()}>
+          <TrashIcon />
+        </TouchableOpacity>
       );
     } else if (this.props.downloading.includes(this.props.title_check)) {
       return <MKSpinner />;
     }
     return (
-      <CloudIcon onPress={() =>
-        _download(
-          this.props.item,
-          this.props.setDownloads,
-          this.props.setStateCurrentlyDownloading,
-          this.props.downloading
-        )}/>
+      <TouchableOpacity
+        onPress={() =>
+          _download(
+            this.props.item,
+            this.props.setDownloads,
+            this.props.setStateCurrentlyDownloading,
+            this.props.downloading
+          )}
+      >
+        <CloudIcon />
+      </TouchableOpacity>
     );
   }
 }
