@@ -84,7 +84,7 @@ class Episode extends Component {
           downloading={this.props.downloading}
           setStateCurrentlyDownloading={this.props.setStateCurrentlyDownloading}
         />
-        <Text style={{ flex: 0.85 }}>{this.props.item.title + '\n'}</Text>
+      <Text style={{ flex: 0.95 }}>{this.props.item.title + '\n'}</Text>
       </View>
     );
   }

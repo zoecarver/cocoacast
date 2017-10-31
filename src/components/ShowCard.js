@@ -20,6 +20,7 @@ import {
   MKSpinner,
   MKColor,
 } from 'react-native-material-kit';
+import {SubscribeIcon} from './buttons';
 import _styles from '../styles';
 
 const theme = getTheme();
@@ -49,7 +50,9 @@ class ShowCard extends Component {
           {data.artistName ? ': ' + data.artistName : null}
           {'\n \n' + data.description}
         </Text>
-        <View style={theme.cardMenuStyle} />
+        <View style={theme.cardMenuStyle}>
+          <SubscribeIcon/>
+        </View>
         <View style={theme.cardActionStyle}>
           <FlatEppisodeButton
             onPress={() =>

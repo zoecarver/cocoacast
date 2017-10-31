@@ -1,4 +1,4 @@
-import { Icon } from 'react-native-elements';
+import { Icon, Badge } from 'react-native-elements';
 import React, { Component, PropTypes } from 'react';
 import {TouchableOpacity} from 'react-native';
 import { PlainFab } from './MKstuff';
@@ -16,6 +16,19 @@ const search = (array, id) => {
   return lookup[id];
 };
 
+export class SubscribeIcon extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Badge
+        raised
+        value='SUBSCRIBE' />
+    );
+  }
+}
 export class PauseIcon extends Component {
   constructor(props) {
     super(props);
