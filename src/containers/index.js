@@ -9,6 +9,7 @@ import {
   setPlaying,
   setSound,
   setDuration,
+  setSearching,
 } from '../redux/actions';
 import Home from '../components/home';
 
@@ -22,6 +23,7 @@ const SateToProps = state => {
     playing: state.main.playing,
     sound: state.main.sound,
     duration: state.main.duration,
+    searching: state.main.searching,
   };
 };
 
@@ -37,11 +39,11 @@ const DispatchToProps = dispatch => {
       dispatch(setDownloading(title, setTo, downloading)),
     setPlaying: obj => dispatch(setPlaying(obj)),
     setSound: sound => dispatch(setSound(sound)),
-    setDuration: num => dispatch(setDuration(num))
+    setDuration: num => dispatch(setDuration(num)),
+    setSearching: bool => dispatch(setSearching(bool)),
   };
 };
 
 export default (VisibleCounter = connect(SateToProps, DispatchToProps)(Home));
-
 
 //TODO: fix duration thing so that it can just be called from this.props.sound

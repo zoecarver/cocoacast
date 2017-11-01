@@ -9,6 +9,7 @@ const defaultState = {
   playing: {},
   sound: void 0,
   duration: void 0,
+  searching: false,
 };
 
 const main = (state = defaultState, action) => {
@@ -48,6 +49,10 @@ const main = (state = defaultState, action) => {
     case 'SET_DURATION':
       return Object.assign({}, state, {
         duration: action.val,
+      });
+    case 'SET_SEARCHING':
+      return Object.assign({}, state, {
+        searching: action.val,
       });
     default:
       return state;

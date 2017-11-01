@@ -41,13 +41,15 @@ class Episode extends Component {
   }
 
   _press() {
-    this.props.setPlaying(this.props.item)
+    this.props.setPlaying(this.props.item);
 
     if (!this.props.sound) {
-      this.props.setSound(_play({
-        key: this.props.item.title,
-        url: this.props.item.enclosures[0].url,
-      }));
+      this.props.setSound(
+        _play({
+          key: this.props.item.title,
+          url: this.props.item.enclosures[0].url,
+        })
+      );
     } else {
       if (this.props.sound.key !== this.props.item.title) {
         console.log(this.props.sound.key, this.props.item.title);
@@ -71,9 +73,13 @@ class Episode extends Component {
   }
 
   render() {
-    if (this.props.sound && this.props.sound.isLoaded() && !this.props.duration) {
+    if (
+      this.props.sound &&
+      this.props.sound.isLoaded() &&
+      !this.props.duration
+    ) {
       console.log(this.props.sound.isLoaded(), this.props.sound.getDuration());
-      this.props.setDuration(this.props.sound.getDuration())
+      this.props.setDuration(this.props.sound.getDuration());
     }
 
     return (

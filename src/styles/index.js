@@ -85,5 +85,6 @@ export default (width, height) =>
       flex: 1,
       alignItems: 'stretch',
       justifyContent: 'center',
+      flexDirection: 'row',
     },
   });

@@ -8,20 +8,18 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import {
-  getTheme
-} from 'react-native-material-kit';
-import {Slider} from 'react-native-elements';
+import { getTheme } from 'react-native-material-kit';
+import { Slider } from 'react-native-elements';
 import _styles from '../styles';
 
 let { height, width } = Dimensions.get('window');
 const styles = _styles(width, height);
 const theme = getTheme();
-const format_date = (date) => {
+const format_date = date => {
   let arr = new Date(date).toString().split(' ');
-  arr = [arr[0], arr[1], arr[2], arr[3]]
+  arr = [arr[0], arr[1], arr[2], arr[3]];
   return arr.join(' ');
-}
+};
 
 class Playing extends Component {
   constructor(props) {
@@ -40,9 +38,7 @@ class Playing extends Component {
           <Text style={theme.cardContentStyle}>
             {item.title} - {format_date(item.created)}
           </Text>
-          <View style={theme.cardMenuStyle}>
-
-          </View>
+          <View style={theme.cardMenuStyle} />
           <View style={[theme.sliderView, theme.cardActionStyle]}>
             <Slider
               minimumValue={0}
@@ -50,15 +46,16 @@ class Playing extends Component {
               value={0.3}
               minimumTrackTintColor={'#b3b3b3'}
               thumbTintColor={'#b3b3b3'}
-              thumbTouchSize={{width: 20, height: 20}}
-              onValueChange={(value) => this.props.sound.setCurrentTime(value)} />
+              thumbTouchSize={{ width: 20, height: 20 }}
+              onValueChange={value => this.props.sound.setCurrentTime(value)}
+            />
           </View>
           <View style={theme.cardActionStyle}>
-            <Text>hi</Text>
+            <Button title={'cast'} onPress={() => this.props.setSearching(true)} />
           </View>
         </View>
       );
-    }else {
+    } else {
       return null;
     }
   }

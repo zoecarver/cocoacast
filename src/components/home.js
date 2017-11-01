@@ -7,6 +7,7 @@ import DownloadsList from './downloads';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
 import Playing from './playing';
+import ChromeCast from './chromecast';
 
 class Home extends Component {
   constructor(props) {
@@ -14,6 +15,16 @@ class Home extends Component {
   }
 
   render() {
+    if (this.props.searching) {
+      return (
+        <ChromeCast
+          url={this.props.playing.enclosures[0].url}
+          meadiaTitle={this.props.playing.title}
+          imageUrl={this.props.playing.media.content[0].url[0]}
+          setSearching={this.props.setSearching}
+        />
+      );
+    }
     return (
       <Swiper loop={false} index={1}>
         <ScrollView>
@@ -61,10 +72,17 @@ class Home extends Component {
             duration={this.props.duration}
           />
         </ScrollView>
-        <Playing item={this.props.playing} duration={this.props.duration} sound={this.props.sound} />
+        <Playing
+          item={this.props.playing}
+          duration={this.props.duration}
+          sound={this.props.sound}
+          setSearching={this.props.setSearching}
+        />
       </Swiper>
     );
   }
 }
 
 export default Home;
+
+//TODO: move Chromecast into swiper

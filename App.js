@@ -31,4 +31,8 @@ export default class App extends Component {
 * - https://facebook.github.io/react-native/docs/performance.html#using-console-log-statements
 * - https://facebook.github.io/react-native/docs/performance.html#listview-initial-rendering-is-too-slow-or-scroll-performance-is-bad-for-large-lists
 * - figure out why redux only triggers re-render after first deletion of podcast
+* - implement refresh control https://facebook.github.io/react-native/docs/refreshcontrol.html
+* - move to slide (animated)
+*   + settings for animations
+* -
 */

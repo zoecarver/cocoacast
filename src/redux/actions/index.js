@@ -85,5 +85,11 @@ export const setDuration = (num) => {
     val: num,
   }
 }
+export const setSearching = (bool) => {
+  return {
+    type: 'SET_SEARCHING',
+    val: bool,
+  }
+}
 
 //TODO: implement lodash for deep cloning

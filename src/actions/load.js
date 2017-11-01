@@ -69,7 +69,7 @@ exports.search = search_term =>
         console.log('search res', res);
         if (res.status === 200) {
           return res.json();
-        }else {
+        } else {
           throw new Error(404);
         }
       })
