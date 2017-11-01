@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import { ip, port } from '../config/load';
 
 exports.loadUser = () =>
   new Promise(resolve => {
@@ -53,4 +54,30 @@ exports.loadDownloadSubs = () =>
         resolve([]);
       }
     });
+  });
+
+exports.search = search_term =>
+  new Promise(resolve => {
+    fetch('https://' + ip + port + '/search/' + search_term, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then(res => {
+        console.log('search res', res);
+        if (res.status === 200) {
+          return res.json();
+        }else {
+          throw new Error(404);
+        }
+      })
+      .then(responseJson => {
+        console.log('got search', responseJson);
+        resolve(responseJson);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   });

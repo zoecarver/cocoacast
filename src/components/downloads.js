@@ -32,6 +32,11 @@ class Downloads extends Component {
               setStateCurrentlyDownloading={
                 this.props.setStateCurrentlyDownloading
               }
+              setPlaying={this.props.setPlaying}
+              setSound={this.props.setSound}
+              sound={this.props.sound}
+              setDuration={this.props.setDuration}
+              duration={this.props.duration}
             />
           ))
         ) : (

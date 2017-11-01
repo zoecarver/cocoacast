@@ -38,23 +38,24 @@ class Episode extends Component {
       playing: false,
       vol: 1,
     };
-    this.sound = false;
   }
 
   _press() {
-    if (!this.sound) {
-      this.sound = _play({
+    this.props.setPlaying(this.props.item)
+
+    if (!this.props.sound) {
+      this.props.setSound(_play({
         key: this.props.item.title,
         url: this.props.item.enclosures[0].url,
-      });
+      }));
     } else {
-      if (this.sound.key !== this.props.item.title) {
-        console.log(this.sound.key, this.props.item.title);
+      if (this.props.sound.key !== this.props.item.title) {
+        console.log(this.props.sound.key, this.props.item.title);
         console.log('url ', this.props.item.enclosures[0].url);
-        this.sound.release();
-        this.sound = false;
+        this.props.sound.release();
+        this.props.setSound(void 0);
       } else {
-        const sound = this.sound;
+        const sound = this.props.sound;
 
         if (this.state.playing) {
           this.setState({ playing: false });
@@ -70,6 +71,11 @@ class Episode extends Component {
   }
 
   render() {
+    if (this.props.sound && this.props.sound.isLoaded() && !this.props.duration) {
+      console.log(this.props.sound.isLoaded(), this.props.sound.getDuration());
+      this.props.setDuration(this.props.sound.getDuration())
+    }
+
     return (
       <View style={styles.episodes}>
         <TouchableOpacity onPress={this._press.bind(this)}>
@@ -84,7 +90,7 @@ class Episode extends Component {
           downloading={this.props.downloading}
           setStateCurrentlyDownloading={this.props.setStateCurrentlyDownloading}
         />
-      <Text style={{ flex: 0.95 }}>{this.props.item.title + '\n'}</Text>
+        <Text style={{ flex: 0.95 }}>{this.props.item.title + '\n'}</Text>
       </View>
     );
   }

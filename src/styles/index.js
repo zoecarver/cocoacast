@@ -74,4 +74,16 @@ export default (width, height) =>
       justifyContent: 'center',
       alignItems: 'center',
     },
+    cardImageStyle: {
+      width: width,
+    },
+    playingCard: {
+      width: width,
+      height: height,
+    },
+    sliderView: {
+      flex: 1,
+      alignItems: 'stretch',
+      justifyContent: 'center',
+    },
   });

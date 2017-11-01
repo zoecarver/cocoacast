@@ -1,6 +1,6 @@
 import { Icon, Badge } from 'react-native-elements';
 import React, { Component, PropTypes } from 'react';
-import {TouchableOpacity} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { PlainFab } from './MKstuff';
 import _download from '../actions/download';
 import _ from 'lodash';
@@ -22,13 +22,20 @@ export class SubscribeIcon extends Component {
   }
 
   render() {
-    return (
-      <Badge
-        raised
-        value='SUBSCRIBE' />
-    );
+    return <Badge raised value="SUBSCRIBE" />;
   }
 }
+
+export class UnSubscribeIcon extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return <Badge raised value="UN-SUBSCRIBE" />;
+  }
+}
+
 export class PauseIcon extends Component {
   constructor(props) {
     super(props);
@@ -125,3 +132,5 @@ export class DownloadButton extends Component {
     );
   }
 }
+
+//TODO: add unsubscribe and link

@@ -5,6 +5,10 @@ import {
   getDownloads,
   removeDownloads,
   setDownloading,
+  setUser,
+  setPlaying,
+  setSound,
+  setDuration,
 } from '../redux/actions';
 import Home from '../components/home';
 
@@ -14,6 +18,10 @@ const SateToProps = state => {
     showItems: state.main.showItems,
     downloads: state.main.downloads,
     downloading: state.main.downloading,
+    user: state.main.user,
+    playing: state.main.playing,
+    sound: state.main.sound,
+    duration: state.main.duration,
   };
 };
 
@@ -21,12 +29,19 @@ const DispatchToProps = dispatch => {
   return {
     setCurrent: (element, shows) => dispatch(setCurrent(element, shows)),
     setShows: arr => dispatch(setShows(arr)),
+    setUser: obj => dispatch(setUser(obj)),
     setDownloads: arr => dispatch(getDownloads(arr)),
     unSetDownloads: (title, downloads) =>
       dispatch(removeDownloads(title, downloads)),
     setStateCurrentlyDownloading: (title, setTo, downloading) =>
       dispatch(setDownloading(title, setTo, downloading)),
+    setPlaying: obj => dispatch(setPlaying(obj)),
+    setSound: sound => dispatch(setSound(sound)),
+    setDuration: num => dispatch(setDuration(num))
   };
 };
 
 export default (VisibleCounter = connect(SateToProps, DispatchToProps)(Home));
+
+
+//TODO: fix duration thing so that it can just be called from this.props.sound

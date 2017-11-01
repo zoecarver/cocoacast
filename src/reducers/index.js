@@ -5,6 +5,10 @@ const defaultState = {
   showItems: [],
   downloads: [],
   downloading: [],
+  user: {},
+  playing: {},
+  sound: void 0,
+  duration: void 0,
 };
 
 const main = (state = defaultState, action) => {
@@ -17,6 +21,10 @@ const main = (state = defaultState, action) => {
       return Object.assign({}, state, {
         shows: action.val,
       });
+    case 'SET_USER':
+      return Object.assign({}, state, {
+        user: action.val,
+      });
     case 'DOWNLOADS':
       return Object.assign({}, state, {
         downloads: action.val,
@@ -28,6 +36,18 @@ const main = (state = defaultState, action) => {
     case 'SET_DOWNLOADING':
       return Object.assign({}, state, {
         downloading: action.val,
+      });
+    case 'SET_PLAYING':
+      return Object.assign({}, state, {
+        playing: action.val,
+      });
+    case 'SET_SOUND':
+      return Object.assign({}, state, {
+        sound: action.val,
+      });
+    case 'SET_DURATION':
+      return Object.assign({}, state, {
+        duration: action.val,
       });
     default:
       return state;

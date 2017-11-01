@@ -20,7 +20,8 @@ import {
   MKSpinner,
   MKColor,
 } from 'react-native-material-kit';
-import {SubscribeIcon} from './buttons';
+import { subscribe, unSubscribe } from '../actions/subscribe';
+import { SubscribeIcon, UnSubscribeIcon } from './buttons';
 import _styles from '../styles';
 
 const theme = getTheme();
@@ -38,6 +39,11 @@ class ShowCard extends Component {
 
   render() {
     let data = this.props.data;
+    let name =
+      'https://itunes.apple.com/lookup?id=' +
+      data.data.collectionId +
+      '&entity=podcast';
+    console.log('name of ep', name);
 
     return (
       <View style={[theme.cardStyle, styles.cardStyle]}>
@@ -51,7 +57,22 @@ class ShowCard extends Component {
           {'\n \n' + data.description}
         </Text>
         <View style={theme.cardMenuStyle}>
-          <SubscribeIcon/>
+          {this.props.user.subscriptions &&
+          this.props.user.subscriptions.includes(name) ? (
+            <TouchableOpacity
+              onPress={() =>
+                unSubscribe(this.props.user.id, name, this.props.setUser)}
+            >
+              <UnSubscribeIcon />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() =>
+                subscribe(this.props.user.id, name, this.props.setUser)}
+            >
+              <SubscribeIcon />
+            </TouchableOpacity>
+          )}
         </View>
         <View style={theme.cardActionStyle}>
           <FlatEppisodeButton

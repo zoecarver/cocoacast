@@ -6,6 +6,7 @@ import EpisodesList from './episodes';
 import DownloadsList from './downloads';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
+import Playing from './playing';
 
 class Home extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Swiper loop={false} index={0}>
+      <Swiper loop={false} index={1}>
         <ScrollView>
           <DownloadsList
             setDownloads={this.props.setDownloads}
@@ -25,6 +26,11 @@ class Home extends Component {
             setStateCurrentlyDownloading={
               this.props.setStateCurrentlyDownloading
             }
+            setPlaying={this.props.setPlaying}
+            setSound={this.props.setSound}
+            sound={this.props.sound}
+            setDuration={this.props.setDuration}
+            duration={this.props.duration}
           />
         </ScrollView>
         <ScrollView>
@@ -33,6 +39,8 @@ class Home extends Component {
             setShows={this.props.setShows}
             setDownloads={this.props.setDownloads}
             shows={this.props.shows}
+            setUser={this.props.setUser}
+            user={this.props.user}
           />
           <Auth />
         </ScrollView>
@@ -46,8 +54,14 @@ class Home extends Component {
             setStateCurrentlyDownloading={
               this.props.setStateCurrentlyDownloading
             }
+            setPlaying={this.props.setPlaying}
+            setSound={this.props.setSound}
+            sound={this.props.sound}
+            setDuration={this.props.setDuration}
+            duration={this.props.duration}
           />
         </ScrollView>
+        <Playing item={this.props.playing} duration={this.props.duration} sound={this.props.sound} />
       </Swiper>
     );
   }

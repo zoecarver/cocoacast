@@ -1,4 +1,7 @@
-export function subscribe(name) {
+import { AsyncStorage } from 'react-native';
+import { ip, port } from '../config/load';
+
+export function subscribe(user_id, name, func) {
   fetch('http://' + ip + port + '/subscribe', {
     method: 'POST',
     headers: {
@@ -6,16 +9,14 @@ export function subscribe(name) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      id: this.state.user.id,
+      id: user_id,
       podId: name,
     }),
   })
     .then(response => response.json())
     .then(responseJson => {
       AsyncStorage.setItem('User', JSON.stringify(responseJson), () => {
-        this.loadUser(() => {
-          this.loadSubs();
-        });
+        func(responseJson);
       });
     })
     .catch(error => {
@@ -23,7 +24,7 @@ export function subscribe(name) {
     });
 }
 
-export function unSubscribe(name) {
+export function unSubscribe(user_id, name, func) {
   fetch('http://' + ip + port + '/unsubscribe', {
     method: 'POST',
     headers: {
@@ -31,16 +32,14 @@ export function unSubscribe(name) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      id: this.state.user.id,
+      id: user_id,
       podId: name,
     }),
   })
     .then(response => response.json())
     .then(responseJson => {
       AsyncStorage.setItem('User', JSON.stringify(responseJson), () => {
-        this.loadUser(() => {
-          this.loadSubs();
-        });
+        func(responseJson);
       });
     })
     .catch(error => {

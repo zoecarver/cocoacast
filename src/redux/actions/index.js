@@ -58,4 +58,32 @@ export const removeDownloads = (title, downloads_input) => {
   }
 }
 
+export const setUser = (obj) => {
+  return {
+    type: 'SET_USER',
+    val: obj,
+  }
+}
+
+export const setPlaying = (obj) => {
+  return {
+    type: 'SET_PLAYING',
+    val: obj,
+  }
+}
+
+export const setSound = (sound) => {
+  return {
+    type: 'SET_SOUND',
+    val: sound,
+  }
+}
+
+export const setDuration = (num) => {
+  return {
+    type: 'SET_DURATION',
+    val: num,
+  }
+}
+
 //TODO: implement lodash for deep cloning
