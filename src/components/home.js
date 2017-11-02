@@ -81,6 +81,7 @@ class Home extends Component {
           duration={this.props.duration}
           sound={this.props.sound}
           setSearching={this.props.setSearching}
+          showItems={this.props.showItems}
         />
       </Swiper>
     );

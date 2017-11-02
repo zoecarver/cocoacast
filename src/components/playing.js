@@ -53,7 +53,11 @@ class Playing extends Component {
       return (
         <View style={[theme.cardStyle, styles.playingCard]}>
           <Image
-            source={{ uri: item.media.content[0].url[0] }}
+            source={{
+              uri: item.media
+                ? item.media.content[0].url[0]
+                : this.props.showItems.data.artworkUrl600,
+            }}
             style={[theme.cardImageStyle, styles.cardImageStyle]}
           />
           <Text style={theme.cardContentStyle}>

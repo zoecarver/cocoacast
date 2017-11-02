@@ -46,7 +46,10 @@ class Episode extends Component {
     this.props.setPlaying(this.props.item);
 
     if (!this.props.sound) {
-      if (this.props.user.checked && !this.props.user.checked.includes(this.props.item.title)) {
+      if (
+        this.props.user.checked &&
+        !this.props.user.checked.includes(this.props.item.title)
+      ) {
         _setPlayed(
           this.props.user.id,
           this.props.item.title,
@@ -116,3 +119,5 @@ class Episode extends Component {
 }
 
 export default Episode;
+
+//TODO: condence _press so that you don't have
