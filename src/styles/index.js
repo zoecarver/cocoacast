@@ -87,4 +87,9 @@ export default (width, height) =>
       justifyContent: 'center',
       flexDirection: 'row',
     },
+    controlView: {
+      flex: 1,
+      justifyContent: 'center',
+      flexDirection: 'row',
+    },
   });

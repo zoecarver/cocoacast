@@ -9,7 +9,8 @@ import {
   Button,
 } from 'react-native';
 import { getTheme } from 'react-native-material-kit';
-import { Slider } from 'react-native-elements';
+import { Slider, Icon } from 'react-native-elements';
+import { PPIcon } from './episode_item';
 import _styles from '../styles';
 
 let { height, width } = Dimensions.get('window');
@@ -24,6 +25,26 @@ const format_date = date => {
 class Playing extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      playing: false,
+    };
+  }
+
+  _press() {
+    if (this.props.sound) {
+      const sound = this.props.sound;
+
+      if (this.state.playing) {
+        this.setState({ playing: false });
+        sound.pause();
+      } else {
+        this.setState({ playing: true });
+        sound.play(() => {
+          sound.release();
+        });
+      }
+    }
   }
 
   render() {
@@ -50,8 +71,40 @@ class Playing extends Component {
               onValueChange={value => this.props.sound.setCurrentTime(value)}
             />
           </View>
+          <View style={[theme.cardActionStyle, styles.controlView]}>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.sound.getCurrentTime(seconds => {
+                  console.log('current time', seconds);
+                  this.props.sound.setCurrentTime(seconds + 15);
+                });
+              }}
+            >
+              <Icon name="replay-10" color="#f50" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this._press.bind(this)}>
+              <PPIcon playing={this.state.playing} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.sound.getCurrentTime(seconds => {
+                  console.log('current time', seconds);
+                  if (seconds - 15 > 0) {
+                    this.props.sound.setCurrentTime(seconds - 15);
+                  } else {
+                    this.props.sound.setCurrentTime(0);
+                  }
+                });
+              }}
+            >
+              <Icon name="forward-10" color="#f50" />
+            </TouchableOpacity>
+          </View>
           <View style={theme.cardActionStyle}>
-            <Button title={'cast'} onPress={() => this.props.setSearching(true)} />
+            <Button
+              title={'cast'}
+              onPress={() => this.props.setSearching(true)}
+            />
           </View>
         </View>
       );
@@ -62,3 +115,4 @@ class Playing extends Component {
 }
 
 export default Playing;
+//TODO: fix for cortex and non media stuff

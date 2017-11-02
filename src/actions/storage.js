@@ -61,7 +61,8 @@ exports.set_user = () =>
 
     const googleUrl = 'https://www.googleapis.com/plus/v1/people/me';
     manager.makeRequest('google', googleUrl).then(resp => {
-      resp.data.subscriptions = [];
+      // resp.data.subscriptions = [];
+      // resp.data.checked = [];
       console.log('Data -> ', resp.data);
 
       AsyncStorage.setItem('User', JSON.stringify(resp.data), () => {

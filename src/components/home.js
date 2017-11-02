@@ -42,6 +42,8 @@ class Home extends Component {
             sound={this.props.sound}
             setDuration={this.props.setDuration}
             duration={this.props.duration}
+            user={this.props.user}
+            setChecked={this.props.setChecked}
           />
         </ScrollView>
         <ScrollView>
@@ -70,6 +72,8 @@ class Home extends Component {
             sound={this.props.sound}
             setDuration={this.props.setDuration}
             duration={this.props.duration}
+            user={this.props.user}
+            setChecked={this.props.setChecked}
           />
         </ScrollView>
         <Playing
@@ -85,4 +89,5 @@ class Home extends Component {
 
 export default Home;
 
-//TODO: move Chromecast into swiper
+//~~TODO: move Chromecast into swiper~~
+//TODO: change setChecked to setUser

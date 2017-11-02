@@ -54,6 +54,10 @@ const main = (state = defaultState, action) => {
       return Object.assign({}, state, {
         searching: action.val,
       });
+    case 'SET_CHECKED':
+      return Object.assign({}, state, {
+        user: action.val,
+      });
     default:
       return state;
   }

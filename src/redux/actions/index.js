@@ -85,10 +85,18 @@ export const setDuration = (num) => {
     val: num,
   }
 }
+
 export const setSearching = (bool) => {
   return {
     type: 'SET_SEARCHING',
     val: bool,
+  }
+}
+
+export const setChecked = (arr) => {
+  return {
+    type: 'SET_CHECKED',
+    val: arr,
   }
 }
 

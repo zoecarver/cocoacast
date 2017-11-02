@@ -8,12 +8,14 @@ import _styles from '../styles';
 import _play from '../actions/sound';
 import { PlayIcon, PauseIcon, DownloadButton } from './buttons';
 import _IS from '../actions/intelligent_speed';
+import _setPlayed from '../actions/checked';
+import { Icon } from 'react-native-elements';
 
 let { height, width } = Dimensions.get('window');
 
 const styles = _styles(width, height);
 
-class PPIcon extends Component {
+export class PPIcon extends Component {
   constructor(props) {
     super(props);
   }
@@ -44,6 +46,13 @@ class Episode extends Component {
     this.props.setPlaying(this.props.item);
 
     if (!this.props.sound) {
+      if (this.props.user.checked && !this.props.user.checked.includes(this.props.item.title)) {
+        _setPlayed(
+          this.props.user.id,
+          this.props.item.title,
+          this.props.setChecked
+        );
+      }
       this.props.setSound(
         _play({
           key: this.props.item.title,
@@ -96,7 +105,11 @@ class Episode extends Component {
           downloading={this.props.downloading}
           setStateCurrentlyDownloading={this.props.setStateCurrentlyDownloading}
         />
-        <Text style={{ flex: 0.95 }}>{this.props.item.title + '\n'}</Text>
+        <Text style={{ flex: 0.9 }}>{this.props.item.title + '\n'}</Text>
+        {this.props.user.checked &&
+        this.props.user.checked.includes(this.props.item.title) ? (
+          <Icon type="simple-line-icon" name="check" color="#f50" />
+        ) : null}
       </View>
     );
   }

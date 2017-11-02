@@ -10,6 +10,7 @@ import {
   setSound,
   setDuration,
   setSearching,
+  setChecked,
 } from '../redux/actions';
 import Home from '../components/home';
 
@@ -41,6 +42,7 @@ const DispatchToProps = dispatch => {
     setSound: sound => dispatch(setSound(sound)),
     setDuration: num => dispatch(setDuration(num)),
     setSearching: bool => dispatch(setSearching(bool)),
+    setChecked: arr => dispatch(setChecked(arr)),
   };
 };
 

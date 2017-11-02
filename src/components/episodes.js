@@ -37,6 +37,8 @@ class EpisodesList extends Component {
               sound={this.props.sound}
               setDuration={this.props.setDuration}
               duration={this.props.duration}
+              user={this.props.user}
+              setChecked={this.props.setChecked}
             />
           ))
         ) : (

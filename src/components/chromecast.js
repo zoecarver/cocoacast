@@ -108,7 +108,10 @@ class ChromeCast extends Component {
         <TouchableOpacity onPress={this.getChromecasts} style={[styles.button]}>
           <Text>Show chromecasts</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.setSearching(false)} style={[styles.button]}>
+        <TouchableOpacity
+          onPress={() => this.props.setSearching(false)}
+          style={[styles.button]}
+        >
           <Text>Back</Text>
         </TouchableOpacity>
         {this.state.chromecastList.map((item, index) =>
