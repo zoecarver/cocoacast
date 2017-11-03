@@ -12,11 +12,6 @@ import logger from 'redux-logger';
 let store = createStore(tbd, applyMiddleware(logger))
 
 export default class App extends Component {
-
-  componentDidMount () {
-
-  }
-
   render() {
     return (
       <Provider store={store}>

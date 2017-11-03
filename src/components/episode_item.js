@@ -42,44 +42,56 @@ class Episode extends Component {
     };
   }
 
+  _setSound() {
+    if (
+      this.props.user.checked &&
+      !this.props.user.checked.includes(this.props.item.title)
+    ) {
+      _setPlayed(
+        this.props.user.id,
+        this.props.item.title,
+        this.props.setChecked
+      );
+    }
+    this.props.setSound(
+      _play({
+        key: this.props.item.title,
+        url: this.props.item.enclosures[0].url,
+      })
+    );
+    this.setState({playing: true});
+  }
+
+  _playPauseControl(sound) {
+    if (!sound) {
+      sound = this.props.sound;
+    }
+
+    if (this.state.playing) {
+      this.setState({ playing: false });
+      sound.pause();
+    } else {
+      this.setState({ playing: true });
+      sound.play(() => {
+        sound.release();
+      });
+    }
+  }
+
   _press() {
     this.props.setPlaying(this.props.item);
 
     if (!this.props.sound) {
-      if (
-        this.props.user.checked &&
-        !this.props.user.checked.includes(this.props.item.title)
-      ) {
-        _setPlayed(
-          this.props.user.id,
-          this.props.item.title,
-          this.props.setChecked
-        );
-      }
-      this.props.setSound(
-        _play({
-          key: this.props.item.title,
-          url: this.props.item.enclosures[0].url,
-        })
-      );
+      this._setSound();
     } else {
       if (this.props.sound.key !== this.props.item.title) {
         console.log(this.props.sound.key, this.props.item.title);
         console.log('url ', this.props.item.enclosures[0].url);
         this.props.sound.release();
         this.props.setSound(void 0);
+        this._setSound();
       } else {
-        const sound = this.props.sound;
-
-        if (this.state.playing) {
-          this.setState({ playing: false });
-          sound.pause();
-        } else {
-          this.setState({ playing: true });
-          sound.play(() => {
-            sound.release();
-          });
-        }
+        this._playPauseControl();
       }
     }
   }

@@ -81,3 +81,5 @@ exports.search = search_term =>
         console.error(error);
       });
   });
+
+//TODO: Add home

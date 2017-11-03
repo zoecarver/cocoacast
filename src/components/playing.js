@@ -67,7 +67,11 @@ class Playing extends Component {
           <View style={[theme.sliderView, theme.cardActionStyle]}>
             <Slider
               minimumValue={0}
-              maximumValue={this.props.duration ? this.props.duration : 1}
+              maximumValue={
+                item.enclosures[0].length
+                  ? item.enclosures[0].length
+                  : this.props.duration
+              }
               value={0.3}
               minimumTrackTintColor={'#b3b3b3'}
               thumbTintColor={'#b3b3b3'}
@@ -119,4 +123,4 @@ class Playing extends Component {
 }
 
 export default Playing;
-//TODO: fix for cortex and non media stuff
+//~~TODO: fix for cortex and non media stuff~~
