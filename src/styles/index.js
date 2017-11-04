@@ -91,5 +91,11 @@ export default (width, height) =>
       flex: 1,
       justifyContent: 'center',
       flexDirection: 'row',
+      flexWrap: 'wrap',
+      width: width,
+    },
+    br: {
+      width: width,
+      height: 25,
     },
   });

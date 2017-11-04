@@ -107,12 +107,12 @@ class Playing extends Component {
             >
               <Icon name="forward-10" color="#f50" />
             </TouchableOpacity>
-          </View>
-          <View style={theme.cardActionStyle}>
-            <Button
-              title={'cast'}
-              onPress={() => this.props.setSearching(true)}
-            />
+            <View style={styles.br}/>
+            <View >
+              <TouchableOpacity onPress={() => this.props.setSearching(true)}>
+                <Icon name="cast" color="#f50" />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       );

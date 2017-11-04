@@ -15,16 +15,6 @@ class Home extends Component {
   }
 
   render() {
-    if (this.props.searching) {
-      return (
-        <ChromeCast
-          url={this.props.playing.enclosures[0].url}
-          meadiaTitle={this.props.playing.title}
-          imageUrl={this.props.playing.media.content[0].url[0]}
-          setSearching={this.props.setSearching}
-        />
-      );
-    }
     return (
       <Swiper loop={false} index={1}>
         <ScrollView>
@@ -76,13 +66,26 @@ class Home extends Component {
             setChecked={this.props.setChecked}
           />
         </ScrollView>
-        <Playing
-          item={this.props.playing}
-          duration={this.props.duration}
-          sound={this.props.sound}
-          setSearching={this.props.setSearching}
-          showItems={this.props.showItems}
-        />
+        {this.props.searching ? (
+          <ChromeCast
+            url={this.props.playing.enclosures[0].url}
+            meadiaTitle={this.props.playing.title}
+            imageUrl={
+              this.props.playing.media
+                ? this.props.playing.media.content[0].url[0]
+                : this.props.showItems.data.artworkUrl600
+            }
+            setSearching={this.props.setSearching}
+          />
+        ) : (
+          <Playing
+            item={this.props.playing}
+            duration={this.props.duration}
+            sound={this.props.sound}
+            setSearching={this.props.setSearching}
+            showItems={this.props.showItems}
+          />
+        )}
       </Swiper>
     );
   }

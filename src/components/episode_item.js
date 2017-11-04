@@ -59,7 +59,7 @@ class Episode extends Component {
         url: this.props.item.enclosures[0].url,
       })
     );
-    this.setState({playing: true});
+    this.setState({ playing: true });
   }
 
   _playPauseControl(sound) {
