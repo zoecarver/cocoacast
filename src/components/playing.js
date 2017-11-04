@@ -22,6 +22,54 @@ const format_date = date => {
   return arr.join(' ');
 };
 
+class Backward extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <TouchableOpacity
+        style={styles.skip}
+        onPress={() => {
+          this.props.sound.getCurrentTime(seconds => {
+            console.log('current time', seconds);
+            this.props.sound.setCurrentTime(seconds + this.props.seconds);
+          });
+        }}
+      >
+        <Icon size={26} name={"replay-"+this.props.seconds.toString()} color="#f50" />
+      </TouchableOpacity>
+    );
+  }
+}
+
+class Forward extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <TouchableOpacity
+        style={styles.skip}
+        onPress={() => {
+          this.props.sound.getCurrentTime(seconds => {
+            console.log('current time', seconds);
+            if (seconds - this.props.seconds > 0) {
+              this.props.sound.setCurrentTime(seconds - this.props.seconds);
+            } else {
+              this.props.sound.setCurrentTime(0);
+            }
+          });
+        }}
+      >
+        <Icon size={26} name={"forward-"+this.props.seconds.toString()} color="#f50" />
+      </TouchableOpacity>
+    );
+  }
+}
+
 class Playing extends Component {
   constructor(props) {
     super(props);
@@ -80,33 +128,13 @@ class Playing extends Component {
             />
           </View>
           <View style={[theme.cardActionStyle, styles.controlView]}>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.sound.getCurrentTime(seconds => {
-                  console.log('current time', seconds);
-                  this.props.sound.setCurrentTime(seconds + 15);
-                });
-              }}
-            >
-              <Icon name="replay-10" color="#f50" />
-            </TouchableOpacity>
+            <Backward seconds={10} />
+            <Backward seconds={30} />
             <TouchableOpacity onPress={this._press.bind(this)}>
-              <PPIcon playing={this.state.playing} />
+              <PPIcon size={52} playing={this.state.playing} />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.sound.getCurrentTime(seconds => {
-                  console.log('current time', seconds);
-                  if (seconds - 15 > 0) {
-                    this.props.sound.setCurrentTime(seconds - 15);
-                  } else {
-                    this.props.sound.setCurrentTime(0);
-                  }
-                });
-              }}
-            >
-              <Icon name="forward-10" color="#f50" />
-            </TouchableOpacity>
+            <Forward seconds={30} />
+            <Forward seconds={10} />
             <View style={styles.br}/>
             <View >
               <TouchableOpacity onPress={() => this.props.setSearching(true)}>

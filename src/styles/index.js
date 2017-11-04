@@ -98,4 +98,13 @@ export default (width, height) =>
       width: width,
       height: 25,
     },
+    skip: {
+      marginLeft: 13,
+      marginRight: 13,
+      marginTop: 51,
+    },
+    backgroundSearchBarView: {
+      backgroundColor: '#383e42',
+      flexDirection: 'row',
+    }
   });

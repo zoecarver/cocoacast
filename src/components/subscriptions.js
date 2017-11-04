@@ -7,6 +7,7 @@ import {
   ScrollView,
   Button,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import ShowCard from './ShowCard';
 import { loadSubs, loadUser, loadDownloadSubs } from '../actions/load';
@@ -14,9 +15,12 @@ import _ from 'lodash';
 import { MKSpinner } from 'react-native-material-kit';
 import Sound from 'react-native-sound';
 import _play from '../actions/sound';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, Icon } from 'react-native-elements';
 import { search } from '../actions/load';
+import _styles from '../styles';
 
+let { height, width } = Dimensions.get('window');
+const styles = _styles(width, height);
 const _loadSubs = () => {
   return loadUser().then(user => {
     return loadSubs(user, 'cocoacast.herokuapp.com', '').then(shows => {
@@ -49,15 +53,19 @@ class Subscriptions extends Component {
   render() {
     return (
       <ScrollView>
-        <SearchBar
-          onChangeText={text => this.setState({ seach: text })}
-          placeholder="Type Here..."
-        />
-        <Button
-          title={'search'}
-          onPress={() =>
-            search(this.state.seach).then(res => this.props.setShows([res]))}
-        />
+        <View style={styles.backgroundSearchBarView}>
+          <SearchBar
+            onChangeText={text => this.setState({ seach: text })}
+            placeholder="Type Here..."
+            width={width*0.8}
+          />
+        <TouchableOpacity onPress={() =>
+          search(this.state.seach).then(res => this.props.setShows([res]))}>
+          <Icon name='search' style={{
+              margin: 15,
+            }}/>
+        </TouchableOpacity>
+        </View>
         {this.props.shows ? (
           _.map(this.props.shows, (show, i) => (
             <ShowCard

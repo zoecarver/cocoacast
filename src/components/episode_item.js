@@ -24,9 +24,9 @@ export class PPIcon extends Component {
     return (
       <View>
         {!this.props.playing ? (
-          <PlayIcon onPress={this.props.func} />
+          <PlayIcon size={this.props.size} onPress={this.props.func} />
         ) : (
-          <PauseIcon onPress={this.props.func} />
+          <PauseIcon size={this.props.size} onPress={this.props.func} />
         )}
       </View>
     );

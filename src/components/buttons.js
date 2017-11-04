@@ -43,7 +43,7 @@ export class PauseIcon extends Component {
 
   render() {
     return (
-      <Icon raised name="control-pause" type="simple-line-icon" color="#f50" />
+      <Icon raised size={this.props.size} name="control-pause" type="simple-line-icon" color="#f50" />
     );
   }
 }
@@ -55,7 +55,7 @@ export class PlayIcon extends Component {
 
   render() {
     return (
-      <Icon raised name="control-play" type="simple-line-icon" color="#f50" />
+      <Icon raised size={this.props.size} name="control-play" type="simple-line-icon" color="#f50" />
     );
   }
 }
