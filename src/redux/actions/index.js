@@ -86,10 +86,10 @@ export const setDuration = (num) => {
   }
 }
 
-export const setSearching = (bool) => {
+export const setSearching = (seconds) => {
   return {
     type: 'SET_SEARCHING',
-    val: bool,
+    val: seconds,
   }
 }
 

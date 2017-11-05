@@ -106,5 +106,8 @@ export default (width, height) =>
     backgroundSearchBarView: {
       backgroundColor: '#383e42',
       flexDirection: 'row',
-    }
+    },
+    showNotesContainter: {
+      margin: width * 0.05,
+    },
   });

@@ -57,14 +57,19 @@ class Subscriptions extends Component {
           <SearchBar
             onChangeText={text => this.setState({ seach: text })}
             placeholder="Type Here..."
-            width={width*0.8}
+            width={width * 0.8}
           />
-        <TouchableOpacity onPress={() =>
-          search(this.state.seach).then(res => this.props.setShows([res]))}>
-          <Icon name='search' style={{
-              margin: 15,
-            }}/>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              search(this.state.seach).then(res => this.props.setShows([res]))}
+          >
+            <Icon
+              name="search"
+              style={{
+                margin: 15,
+              }}
+            />
+          </TouchableOpacity>
         </View>
         {this.props.shows ? (
           _.map(this.props.shows, (show, i) => (

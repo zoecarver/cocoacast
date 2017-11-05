@@ -53,7 +53,7 @@ class ChromeCast extends Component {
       this.props.url,
       this.props.meadiaTitle,
       this.props.imageUrl,
-      0
+      this.props.startAt
     );
   }
 

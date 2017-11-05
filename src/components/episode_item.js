@@ -96,7 +96,7 @@ class Episode extends Component {
     }
   }
 
-  render() {
+  componentWillMount() {
     if (
       this.props.sound &&
       this.props.sound.isLoaded() &&
@@ -105,7 +105,9 @@ class Episode extends Component {
       console.log(this.props.sound.isLoaded(), this.props.sound.getDuration());
       this.props.setDuration(this.props.sound.getDuration());
     }
+  }
 
+  render() {
     return (
       <View style={styles.episodes}>
         <TouchableOpacity onPress={this._press.bind(this)}>

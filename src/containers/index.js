@@ -41,7 +41,7 @@ const DispatchToProps = dispatch => {
     setPlaying: obj => dispatch(setPlaying(obj)),
     setSound: sound => dispatch(setSound(sound)),
     setDuration: num => dispatch(setDuration(num)),
-    setSearching: bool => dispatch(setSearching(bool)),
+    setSearching: seconds => dispatch(setSearching(seconds)),
     setChecked: arr => dispatch(setChecked(arr)),
   };
 };

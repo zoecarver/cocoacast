@@ -75,6 +75,7 @@ class Home extends Component {
                 ? this.props.playing.media.content[0].url[0]
                 : this.props.showItems.data.artworkUrl600
             }
+            startAt={this.props.searching}
             setSearching={this.props.setSearching}
           />
         ) : (

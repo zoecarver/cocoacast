@@ -7,11 +7,13 @@ import {
   Image,
   TouchableOpacity,
   Button,
+  ScrollView,
 } from 'react-native';
 import { getTheme } from 'react-native-material-kit';
-import { Slider, Icon } from 'react-native-elements';
+import { Slider, Icon, Badge } from 'react-native-elements';
 import { PPIcon } from './episode_item';
 import _styles from '../styles';
+import HTML from 'react-native-render-html';
 
 let { height, width } = Dimensions.get('window');
 const styles = _styles(width, height);
@@ -38,7 +40,11 @@ class Backward extends Component {
           });
         }}
       >
-        <Icon size={26} name={"replay-"+this.props.seconds.toString()} color="#f50" />
+        <Icon
+          size={26}
+          name={'replay-' + this.props.seconds.toString()}
+          color="#f50"
+        />
       </TouchableOpacity>
     );
   }
@@ -64,7 +70,11 @@ class Forward extends Component {
           });
         }}
       >
-        <Icon size={26} name={"forward-"+this.props.seconds.toString()} color="#f50" />
+        <Icon
+          size={26}
+          name={'forward-' + this.props.seconds.toString()}
+          color="#f50"
+        />
       </TouchableOpacity>
     );
   }
@@ -98,6 +108,33 @@ class Playing extends Component {
   render() {
     const item = this.props.item;
     if (item.created && this.props.sound) {
+      if (this.state.showNotes) {
+        return (
+          <View>
+            <View style={styles.showNotesContainter}>
+              <TouchableOpacity
+                onPress={() =>
+                  this.setState({ showNotes: !this.state.showNotes })}
+              >
+                <Badge raised value="DON'T SHOW NOTES" />
+              </TouchableOpacity>
+              <ScrollView>
+                <HTML
+                  html={item.description}
+                  tagStyles={{
+                    p: theme.cardContentStyle,
+                    a: {
+                      textDecorationLine: 'none',
+                      color: 'teal',
+                      fontWeight: '800',
+                    },
+                  }}
+                />
+              </ScrollView>
+            </View>
+          </View>
+        );
+      }
       return (
         <View style={[theme.cardStyle, styles.playingCard]}>
           <Image
@@ -111,7 +148,14 @@ class Playing extends Component {
           <Text style={theme.cardContentStyle}>
             {item.title} - {format_date(item.created)}
           </Text>
-          <View style={theme.cardMenuStyle} />
+          <View style={theme.cardMenuStyle}>
+            <TouchableOpacity
+              onPress={() =>
+                this.setState({ showNotes: !this.state.showNotes })}
+            >
+              <Badge raised value="SHOW NOTES" />
+            </TouchableOpacity>
+          </View>
           <View style={[theme.sliderView, theme.cardActionStyle]}>
             <Slider
               minimumValue={0}
@@ -135,9 +179,9 @@ class Playing extends Component {
             </TouchableOpacity>
             <Forward seconds={30} />
             <Forward seconds={10} />
-            <View style={styles.br}/>
-            <View >
-              <TouchableOpacity onPress={() => this.props.setSearching(true)}>
+            <View style={styles.br} />
+            <View>
+              <TouchableOpacity onPress={() => this.props.sound.getCurrentTime(seconds => {this.props.setSearching(seconds)})}>
                 <Icon name="cast" color="#f50" />
               </TouchableOpacity>
             </View>
