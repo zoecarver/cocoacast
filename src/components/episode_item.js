@@ -10,6 +10,7 @@ import { PlayIcon, PauseIcon, DownloadButton } from './buttons';
 import _IS from '../actions/intelligent_speed';
 import _setPlayed from '../actions/checked';
 import { Icon } from 'react-native-elements';
+import track from '../actions/analytics';
 
 let { height, width } = Dimensions.get('window');
 
@@ -60,6 +61,11 @@ class Episode extends Component {
       })
     );
     this.setState({ playing: true });
+    track('PPIcon', {
+      trackEvent: true,
+      catagory: 'play',
+      action: this.props.item.title,
+    });
   }
 
   _playPauseControl(sound) {

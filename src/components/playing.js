@@ -36,7 +36,11 @@ class Backward extends Component {
         onPress={() => {
           this.props.sound.getCurrentTime(seconds => {
             console.log('current time', seconds);
-            this.props.sound.setCurrentTime(seconds + this.props.seconds);
+            if (seconds - this.props.seconds > 0) {
+              this.props.sound.setCurrentTime(seconds - this.props.seconds);
+            } else {
+              this.props.sound.setCurrentTime(0);
+            }
           });
         }}
       >
@@ -62,11 +66,7 @@ class Forward extends Component {
         onPress={() => {
           this.props.sound.getCurrentTime(seconds => {
             console.log('current time', seconds);
-            if (seconds - this.props.seconds > 0) {
-              this.props.sound.setCurrentTime(seconds - this.props.seconds);
-            } else {
-              this.props.sound.setCurrentTime(0);
-            }
+            this.props.sound.setCurrentTime(seconds + this.props.seconds);
           });
         }}
       >
@@ -172,16 +172,21 @@ class Playing extends Component {
             />
           </View>
           <View style={[theme.cardActionStyle, styles.controlView]}>
-            <Backward seconds={10} />
-            <Backward seconds={30} />
+            <Backward sound={this.props.sound} seconds={10} />
+            <Backward sound={this.props.sound} seconds={30} />
             <TouchableOpacity onPress={this._press.bind(this)}>
               <PPIcon size={52} playing={this.state.playing} />
             </TouchableOpacity>
-            <Forward seconds={30} />
-            <Forward seconds={10} />
+            <Forward sound={this.props.sound} seconds={30} />
+            <Forward sound={this.props.sound} seconds={10} />
             <View style={styles.br} />
             <View>
-              <TouchableOpacity onPress={() => this.props.sound.getCurrentTime(seconds => {this.props.setSearching(seconds)})}>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.sound.getCurrentTime(seconds => {
+                    this.props.setSearching(seconds);
+                  })}
+              >
                 <Icon name="cast" color="#f50" />
               </TouchableOpacity>
             </View>

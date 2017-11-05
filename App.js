@@ -8,11 +8,14 @@ import thunk from 'redux-thunk';
 import tbd from './src/reducers/';
 import Home from './src/components/';
 import logger from 'redux-logger';
+import track from './src/actions/analytics';
 
 let store = createStore(tbd, applyMiddleware(logger))
 
 export default class App extends Component {
   render() {
+    track('Home');
+
     return (
       <Provider store={store}>
         <Home />
