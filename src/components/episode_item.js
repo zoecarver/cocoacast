@@ -11,6 +11,7 @@ import _IS from '../actions/intelligent_speed';
 import _setPlayed from '../actions/checked';
 import { Icon } from 'react-native-elements';
 import track from '../actions/analytics';
+import notify from './notifications';
 
 let { height, width } = Dimensions.get('window');
 
@@ -60,7 +61,22 @@ class Episode extends Component {
         url: this.props.item.enclosures[0].url,
       })
     );
+
     this.setState({ playing: true });
+
+    notify(this.props.item.title).then((action) => {
+      console.log('recived', action);
+      if (action === 'play' && this.props.sound) {
+        console.log('audio will be played');
+        this.props.sound.play(() => {
+          this.props.sound.release();
+        });
+      } else if (action === 'pause' && this.props.sound){
+        console.log('audio will be paused');
+        this.props.sound.pause();
+      }
+    })
+
     track('PPIcon', {
       trackEvent: true,
       catagory: 'play',
