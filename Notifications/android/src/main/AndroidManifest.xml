@@ -1,0 +1,17 @@
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.reactlibrary">
+    <service android:name=".mediaPlayerService.MediaPlayerService"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.media.browse.MediaBrowserService"/>
+        </intent-filter>
+    </service>
+    <receiver android:name="com.reactlibrary.JcPlayerNotificationReceiver">
+        <intent-filter>
+            <action android:name="PLAY" />
+            <action android:name="PAUSE" />
+        </intent-filter>
+    </receiver>
+</manifest>
+  
