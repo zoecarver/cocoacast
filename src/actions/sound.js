@@ -1,12 +1,12 @@
 import Sound from 'react-native-sound';
 
-export default testInfo => {
+export default (testInfo, func) => {
   const callback = (error, sound) => {
     if (error) {
       console.error('rn sound ', error);
       return;
     }
-
+    func();
     sound.play(() => {
       sound.release();
     });
