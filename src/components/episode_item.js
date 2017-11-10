@@ -63,6 +63,12 @@ class Episode extends Component {
       }, () => notifications.SendNotification(this.props.sound._key, this.props.item.title))
     );
 
+    /*
+    item.media
+      ? item.media.content[0].url[0]
+      : this.props.showItems.data.artworkUrl600
+    */
+
     this.setState({ playing: true });
 
     track('PPIcon', {

@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -13,6 +14,11 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.zmxv.RNSound.RNSoundModule;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by Zoe 11/07/17.
@@ -55,11 +61,21 @@ class JcNotificationPlayerService {
             notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         }
 
+        //attempting to add costom images...
+        Bitmap image = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon);
+
+        try {
+            URL url = new URL("http://static1.squarespace.com/static/52d66949e4b0a8cec3bcdd46/52d67282e4b0cca8969714fa/59e7fd07d7bdce4230d501ea/1508419814250/1500w/Hello+Internet+slides.192.png");
+            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch(IOException e) {
+            System.out.println(e);
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notification = new Notification.Builder(context)
                     .setVisibility(Notification.VISIBILITY_PUBLIC)
                     .setSmallIcon(R.drawable.icon)
-                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon))
+                    .setLargeIcon(image)
                     .setContent(createNotificationPlayerView())
                     .setContentIntent(PendingIntent.getActivity(context, NOTIFICATION_ID, openUi, PendingIntent.FLAG_CANCEL_CURRENT))
                     .setCategory(Notification.CATEGORY_SOCIAL)
@@ -70,7 +86,7 @@ class JcNotificationPlayerService {
                     //TODO: Set to API below Build.VERSION.SDK_INT
                     .setVisibility(Notification.VISIBILITY_PUBLIC)
                     .setSmallIcon(R.drawable.icon)
-                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon))
+                    .setLargeIcon(image) //BitmapFactory.decodeResource(context.getResources(), R.drawable.icon)
                     .setContent(createNotificationPlayerView())
                     .setContentIntent(PendingIntent.getActivity(context, NOTIFICATION_ID, openUi, PendingIntent.FLAG_CANCEL_CURRENT))
                     .setCategory(Notification.CATEGORY_SOCIAL);
@@ -82,6 +98,21 @@ class JcNotificationPlayerService {
 
     public void updateNotification() {
         createNotificationPlayer(title, player_key);
+    }
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
     }
 
     private RemoteViews createNotificationPlayerView() {
