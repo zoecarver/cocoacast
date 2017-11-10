@@ -62,20 +62,20 @@ class JcNotificationPlayerService {
         }
 
         //attempting to add costom images...
-        Bitmap image = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon);
-
-        try {
-            URL url = new URL("http://static1.squarespace.com/static/52d66949e4b0a8cec3bcdd46/52d67282e4b0cca8969714fa/59e7fd07d7bdce4230d501ea/1508419814250/1500w/Hello+Internet+slides.192.png");
-            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch(IOException e) {
-            System.out.println(e);
-        }
+//        Bitmap image = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon);
+//
+//        try {
+//            URL url = new URL("http://static1.squarespace.com/static/52d66949e4b0a8cec3bcdd46/52d67282e4b0cca8969714fa/59e7fd07d7bdce4230d501ea/1508419814250/1500w/Hello+Internet+slides.192.png");
+//            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//        } catch(IOException e) {
+//            System.out.println(e);
+//        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notification = new Notification.Builder(context)
                     .setVisibility(Notification.VISIBILITY_PUBLIC)
                     .setSmallIcon(R.drawable.icon)
-                    .setLargeIcon(image)
+                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon))
                     .setContent(createNotificationPlayerView())
                     .setContentIntent(PendingIntent.getActivity(context, NOTIFICATION_ID, openUi, PendingIntent.FLAG_CANCEL_CURRENT))
                     .setCategory(Notification.CATEGORY_SOCIAL)
@@ -86,7 +86,7 @@ class JcNotificationPlayerService {
                     //TODO: Set to API below Build.VERSION.SDK_INT
                     .setVisibility(Notification.VISIBILITY_PUBLIC)
                     .setSmallIcon(R.drawable.icon)
-                    .setLargeIcon(image) //BitmapFactory.decodeResource(context.getResources(), R.drawable.icon)
+                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon)) //BitmapFactory.decodeResource(context.getResources(), R.drawable.icon)
                     .setContent(createNotificationPlayerView())
                     .setContentIntent(PendingIntent.getActivity(context, NOTIFICATION_ID, openUi, PendingIntent.FLAG_CANCEL_CURRENT))
                     .setCategory(Notification.CATEGORY_SOCIAL);
