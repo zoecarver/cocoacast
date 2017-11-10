@@ -31,14 +31,14 @@ public class RNNotificationsModule extends ReactContextBaseJavaModule {
 
 
   @ReactMethod
-  public void SendNotification(final Integer key) {
+  public void SendNotification(final Integer key, final String title) {
       JcNotificationPlayerService jcNotificationPlayer;
       jcNotificationPlayer = new JcNotificationPlayerService(reactContext);
       MediaPlayer player = RNSoundModule.playerPool.get(1);
 
       Log.d("SOUND: ALARM", Integer.toString(key));
 
-      jcNotificationPlayer.createNotificationPlayer("hello", key);
+      jcNotificationPlayer.createNotificationPlayer(title, key);
 
 //      String CHANNEL_ID = "my_channel_01";
 //

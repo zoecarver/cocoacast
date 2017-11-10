@@ -17,7 +17,7 @@ public class JcPlayerNotificationReceiver extends BroadcastReceiver {
         Log.d("SOUND", "recived");
         String action = "";
 
-        MediaPlayer player = RNSoundModule.playerPool.get(0);
+        MediaPlayer player = RNSoundModule.playerPool.get(JcNotificationPlayerService.player_key);
 
         JcNotificationPlayerService jcNotificationPlayer = new JcNotificationPlayerService(context);
 
@@ -28,7 +28,7 @@ public class JcPlayerNotificationReceiver extends BroadcastReceiver {
         switch (action) {
             case JcNotificationPlayerService.PLAY:
                 try {
-                    com.zmxv.RNSound.RNSoundModule.play_notification(0, null);
+                    com.zmxv.RNSound.RNSoundModule.play_notification(JcNotificationPlayerService.player_key, null);
                     jcNotificationPlayer.updateNotification();
                     //jcNotificationPlayer.createNotificationPlayer("hello", 1);
                 } catch (Exception e) {
@@ -39,7 +39,7 @@ public class JcPlayerNotificationReceiver extends BroadcastReceiver {
             case JcNotificationPlayerService.PAUSE:
                 try {
                     if(player != null) {
-                        com.zmxv.RNSound.RNSoundModule.pause_notification(0);
+                        com.zmxv.RNSound.RNSoundModule.pause_notification(JcNotificationPlayerService.player_key);
                         jcNotificationPlayer.updateNotification();
                         //jcNotificationPlayer.createNotificationPlayer("hello", 1);
                     }

@@ -43,9 +43,11 @@ class JcNotificationPlayerService {
     public JcNotificationPlayerService(Context context){
         this.context = context;
     }
+    public static int player_key;
 
     public void createNotificationPlayer(String title, int iconResourceResource) {
         this.title = title;
+        this.player_key = iconResourceResource;
         Intent openUi = new Intent(context, context.getClass());
         openUi.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
@@ -79,11 +81,11 @@ class JcNotificationPlayerService {
     }
 
     public void updateNotification() {
-        createNotificationPlayer("title", 0);
+        createNotificationPlayer(title, player_key);
     }
 
     private RemoteViews createNotificationPlayerView() {
-        MediaPlayer player = RNSoundModule.playerPool.get(0);
+        MediaPlayer player = RNSoundModule.playerPool.get(player_key);
         RemoteViews remoteView;
 
         if (player != null && player.isPlaying()) {

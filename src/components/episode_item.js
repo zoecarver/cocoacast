@@ -60,7 +60,7 @@ class Episode extends Component {
       _play({
         key: this.props.item.title,
         url: this.props.item.enclosures[0].url,
-      }, () => notifications.SendNotification(this.props.sound._key))
+      }, () => notifications.SendNotification(this.props.sound._key, this.props.item.title))
     );
 
     this.setState({ playing: true });
