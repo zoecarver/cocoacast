@@ -95,10 +95,10 @@ class JcNotificationPlayerService {
             remoteView = new RemoteViews(context.getPackageName(), R.layout.notification_play);
             remoteView.setOnClickPendingIntent(R.id.btn_play_notification, buildPendingIntent(PLAY, PLAY_ID));
         }
-
-        Log.d("SEND", "Play");
-        remoteView = new RemoteViews(context.getPackageName(), R.layout.notification_play);
-        remoteView.setOnClickPendingIntent(R.id.btn_play_notification, buildPendingIntent(PLAY, PLAY_ID));
+//
+//        Log.d("SEND", "Play");
+//        remoteView = new RemoteViews(context.getPackageName(), R.layout.notification_play);
+//        remoteView.setOnClickPendingIntent(R.id.btn_play_notification, buildPendingIntent(PLAY, PLAY_ID));
 
         //remoteView = new RemoteViews(context.getPackageName(), R.layout.notification_play);
         //remoteView.setOnClickPendingIntent(R.id.btn_play_notification, buildPendingIntent(PAUSE, PLAY_ID));

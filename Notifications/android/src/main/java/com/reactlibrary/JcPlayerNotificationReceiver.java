@@ -20,32 +20,33 @@ public class JcPlayerNotificationReceiver extends BroadcastReceiver {
         MediaPlayer player = RNSoundModule.playerPool.get(0);
 
         JcNotificationPlayerService jcNotificationPlayer = new JcNotificationPlayerService(context);
-        jcNotificationPlayer.updateNotification();
 
-//        if (intent.hasExtra(com.reactlibrary.JcNotificationPlayerService.ACTION)) {
-//            action = intent.getStringExtra(com.reactlibrary.JcNotificationPlayerService.ACTION);
-//        }
-//
-//        switch (action) {
-//            case JcNotificationPlayerService.PLAY:
-//                try {
-//                    com.zmxv.RNSound.RNSoundModule.play_notification(0, null);
-//                    jcNotificationPlayer.createNotificationPlayer("hello", 1);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                break;
-//
-//            case JcNotificationPlayerService.PAUSE:
-//                try {
-//                    if(player != null) {
-//                        com.zmxv.RNSound.RNSoundModule.pause_notification(0);
-//                        jcNotificationPlayer.createNotificationPlayer("hello", 1);
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                break;
-//        }
+        if (intent.hasExtra(com.reactlibrary.JcNotificationPlayerService.ACTION)) {
+            action = intent.getStringExtra(com.reactlibrary.JcNotificationPlayerService.ACTION);
+        }
+
+        switch (action) {
+            case JcNotificationPlayerService.PLAY:
+                try {
+                    com.zmxv.RNSound.RNSoundModule.play_notification(0, null);
+                    jcNotificationPlayer.updateNotification();
+                    //jcNotificationPlayer.createNotificationPlayer("hello", 1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case JcNotificationPlayerService.PAUSE:
+                try {
+                    if(player != null) {
+                        com.zmxv.RNSound.RNSoundModule.pause_notification(0);
+                        jcNotificationPlayer.updateNotification();
+                        //jcNotificationPlayer.createNotificationPlayer("hello", 1);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
     }
 }

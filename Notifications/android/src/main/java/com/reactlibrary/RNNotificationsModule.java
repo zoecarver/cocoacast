@@ -36,7 +36,7 @@ public class RNNotificationsModule extends ReactContextBaseJavaModule {
       jcNotificationPlayer = new JcNotificationPlayerService(reactContext);
       MediaPlayer player = RNSoundModule.playerPool.get(1);
 
-      Log.d("SOUND", "ALARM 2");
+      Log.d("SOUND: ALARM", Integer.toString(key));
 
       jcNotificationPlayer.createNotificationPlayer("hello", key);
 
