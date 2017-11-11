@@ -44,6 +44,7 @@ class Home extends Component {
             setUser={this.props.setUser}
             user={this.props.user}
           />
+          <Auth />
         </ScrollView>
         <ScrollView>
           <EpisodesList
