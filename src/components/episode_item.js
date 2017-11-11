@@ -124,6 +124,13 @@ class Episode extends Component {
   }
 
   render() {
+    //TODO: implement this:
+    // if (this.props.sound) {
+    //   // notifications.getAmplitude(1, vol => {
+    //   //   console.log('AMPLITUDE ', vol);
+    //   // });
+    // }
+
     return (
       <View style={styles.episodes}>
         <TouchableOpacity onPress={this._press.bind(this)}>
