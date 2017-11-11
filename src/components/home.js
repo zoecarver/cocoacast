@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import Subscriptions from './subscriptions';
-import Auth from './auth';
 import EpisodesList from './episodes';
 import DownloadsList from './downloads';
 import PropTypes from 'prop-types';
