@@ -24,3 +24,4 @@ There are still lots of TODOs:
 - [ ] Add playing bar or button (Always present)
 - [ ] Re-Do chrome-cast view
 - [ ] Re-Do shownotes (Bootstrap theme/font)
+- [ ] Fix auth buttons, make persistent until user is logged in.

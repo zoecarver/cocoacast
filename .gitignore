@@ -36,8 +36,6 @@ node_modules/
 !node_modules/react-native-sound
 npm-debug.log
 yarn-error.log
-android
-ios
 !Notifications/*
 !Notifications/android/*
 
